@@ -18,6 +18,7 @@ import theme from './src/styles/theme';
 import AppLoading from 'expo-app-loading';
 import { CarDetails } from './src/screens/CarDetails';
 import { Scheduling } from './src/screens/Scheduling';
+import { SchedulingDetails } from './src/screens/SchedulingDetails';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -36,7 +37,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-        <Scheduling />
+        <SchedulingDetails />
     </ThemeProvider>
   )
 }
