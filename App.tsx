@@ -1,24 +1,22 @@
-import React, { useCallback } from 'react';
-import { Home } from './src/screens/Home';
-import { ThemeProvider } from 'styled-components';
+import 'react-native-gesture-handler';
+import React from 'react';
 import * as SplashScreen from 'expo-splash-screen';
+import { ThemeProvider } from 'styled-components';
 
 import {
-  useFonts,
   Archivo_400Regular,
   Archivo_500Medium,
-  Archivo_600SemiBold,
+  Archivo_600SemiBold, useFonts
 } from '@expo-google-fonts/archivo';
 
 import {
   Inter_400Regular,
   Inter_500Medium
 } from '@expo-google-fonts/inter';
-import theme from './src/styles/theme';
 import AppLoading from 'expo-app-loading';
-import { CarDetails } from './src/screens/CarDetails';
-import { Scheduling } from './src/screens/Scheduling';
-import { SchedulingDetails } from './src/screens/SchedulingDetails';
+import { Routes } from './src/routes';
+import theme from './src/styles/theme';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,12 +30,18 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading/>
+    return <AppLoading />
   }
 
   return (
-    <ThemeProvider theme={theme}>
-        <SchedulingDetails />
-    </ThemeProvider>
+    <GestureHandlerRootView
+      style={{
+        flex: 1,
+      }}
+    >
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
+    </GestureHandlerRootView>
   )
 }

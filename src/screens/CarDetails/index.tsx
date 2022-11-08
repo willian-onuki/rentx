@@ -17,55 +17,33 @@ import {
   About,
   Footer,
 } from './styles';
-import Speed from '../../assets/speed.svg';
-import Acceleration from '../../assets/acceleration.svg';
-import Force from '../../assets/force.svg';
-import Gasoline from '../../assets/gasoline.svg';
-import Exchange from '../../assets/exchange.svg';
-import People from '../../assets/people.svg';
 import { DataSheet, DataSheetProps } from '../../components/DataSheet';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 import { Button } from '../../components/Button';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { CarDTO } from '../../dtos/CarDTO';
+import { CarDetailsProps } from '../../global/routes';
+import { getAccessories } from '../../utils/getAccessories';
 
+interface RouteParam {
+  car: CarDTO;
+}
 
 export function CarDetails() {
-  const dataSheet = [
-    {
-      svg: Speed,
-      detail: '380km/h'
-    },
-    {
-      svg: Acceleration,
-      detail: '3.2s'
-    },
-    {
-      svg: Force,
-      detail: '800 HP'
-    },
-    {
-      svg: Gasoline,
-      detail: 'Gasolina'
-    },
-    {
-      svg: Exchange,
-      detail: 'Auto'
-    },
-    {
-      svg: People,
-      detail: '2 pessoas'
-    },
-  ]
+  const navigation = useNavigation();
+  const route = useRoute<CarDetailsProps>();
+
+  const { car } = route.params as RouteParam;
+
+  const handleConfirmRental = () => {
+    navigation.navigate('CarDetails');
+  }
 
   return (
     <Container>
-      {/* <StatusBar
-        barStyle='dark-content'
-        backgroundColor='transparent'
-        translucent
-      /> */}
       <Header>
-        <BackButton onPress={() => { }} />
+        <BackButton onPress={() => navigation.goBack()} />
       </Header>
       <CarImage>
         <ImageSlider imageUrl={[
@@ -76,34 +54,34 @@ export function CarDetails() {
         <Details>
           <Car>
             <Brand>
-              Lamborghini
+              {car.brand}
             </Brand>
             <Name>
-              Huracan
+              {car.name}
             </Name>
           </Car>
           <Rent>
             <Period>
-              Ao dia
+              {car.rent.period}
             </Period>
             <Price>
-              R$ 580
+              R$ {car.rent.price}
             </Price>
           </Rent>
         </Details>
         <DataSheetGrid>
-          {dataSheet.map(({ svg, detail }, index) => (
-            <DataSheet key={index} svg={svg} detail={detail} />
+          {car.accessories.map(({ type, name }, index) => (
+            <DataSheet key={index} svg={getAccessories(type)} detail={name} />
           ))}
         </DataSheetGrid>
 
         <About>
-          Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar.
+          {car.about}
         </About>
       </Content>
 
       <Footer>
-        <Button title='Escolher período do aluguel' onPress={() => { }} />
+        <Button title='Escolher período do aluguel' onPress={handleConfirmRental} />
       </Footer>
     </Container>
   )

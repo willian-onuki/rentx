@@ -21,8 +21,11 @@ import {
   Price, Rent, RentalPeriod, RentalPrice, RentalPriceDetail, RentalPriceLabel, RentalPriceQuota,
   RentalPriceTotal
 } from './styles';
+import { StackActions, useNavigation } from '@react-navigation/native';
 
 export function SchedulingDetails() {
+  const navigation = useNavigation();
+
   const dataSheet = [
     {
       svg: Speed,
@@ -51,6 +54,11 @@ export function SchedulingDetails() {
   ]
 
   const theme = useTheme();
+
+  const handleScheduleComplete = () => {
+    navigation.dispatch(StackActions.popToTop());
+    navigation.navigate('SchedulingComplete');
+  }
 
   return (
     <Container>
@@ -130,7 +138,7 @@ export function SchedulingDetails() {
       </Content>
 
       <Footer>
-        <Button title='Alugar agora' onPress={() => { }} type='success' />
+        <Button title='Alugar agora' onPress={handleScheduleComplete} type='success' />
       </Footer>
     </Container>
   )
