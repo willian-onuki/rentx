@@ -9,19 +9,22 @@ import {
   HeaderContent,
   Logo,
   CarTotal,
-  CarList
+  CarList,
+  MyCars
 } from './styles';
 import { Car } from '../../components/Car';
 import { useNavigation } from '@react-navigation/native';
 import { api } from '../../services/api';
 import { CarDTO } from '../../dtos/CarDTO';
 import { Loading } from '../../components/Loading';
-
+import { Ionicons } from '@expo/vector-icons'
+import { useTheme } from 'styled-components';
 export function Home() {
   const [cars, setCars] = useState<CarDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const navigation = useNavigation();
+  const theme = useTheme();
 
   const handleCarDetails = (car: CarDTO) => {
     navigation.navigate('CarDetails', { car });
@@ -33,9 +36,6 @@ export function Home() {
         const {data} = await api.get('/cars');
         if (data)
           setCars(data);
-        else
-          console.log('empty list of cars');
-
       } catch (error) {
         console.error(error);
       } finally {
@@ -77,6 +77,9 @@ export function Home() {
         />
         : <Loading/>
       }
+      <MyCars onPress={() => navigation.navigate('SchedulingDone')}>
+        <Ionicons name='ios-car-sport' color={theme.colors.background_primary} size={32} />
+      </MyCars>
     </Container>
   )
 }

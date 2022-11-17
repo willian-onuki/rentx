@@ -50,7 +50,7 @@ export const Label = styled.Text`
   margin-bottom: 9px;
 `;
 
-export const Date = styled.Text<DateProps>`
+export const DateSelected = styled.Text<DateProps>`
   ${({ selected }) => !selected && css`
     border-bottom-width: 2px;
     border-color: ${({ theme }) => theme.colors.text};

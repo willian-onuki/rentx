@@ -23,13 +23,17 @@ export function ImageSlider({imageUrl}: Props) {
       </ImageIndexes>
 
       <CarImageWrapper>
-        {imageUrl.length && imageUrl.map((image, index) => (
+        {/* {imageUrl.length && imageUrl.map((image, index) => (
           <CarImage
             key={index}
             source={{ uri: image }}
             resizeMode="contain"
           />
-        ))}
+        ))} */}
+        <CarImage
+          source={{ uri: imageUrl[0] }}
+          resizeMode="contain"
+        />
       </CarImageWrapper>
     </Container>
   )

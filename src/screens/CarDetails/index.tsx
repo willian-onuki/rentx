@@ -37,7 +37,9 @@ export function CarDetails() {
   const { car } = route.params as RouteParam;
 
   const handleConfirmRental = () => {
-    navigation.navigate('CarDetails');
+    navigation.navigate('Scheduling', {
+      car
+    });
   }
 
   return (
@@ -46,9 +48,7 @@ export function CarDetails() {
         <BackButton onPress={() => navigation.goBack()} />
       </Header>
       <CarImage>
-        <ImageSlider imageUrl={[
-          'https://freepngimg.com/thumb/audi/35227-5-audi-rs5-red.png'
-        ]} />
+        <ImageSlider imageUrl={car.photos} />
       </CarImage>
       <Content>
         <Details>

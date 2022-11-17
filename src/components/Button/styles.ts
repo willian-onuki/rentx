@@ -7,7 +7,7 @@ interface Props {
 
 export const Container = styled(RectButton) <Props>`
   width: 100%;
-  padding:  19px;
+  padding: 19px;
   background: ${({ theme, type }) => type === 'success' ? theme.colors.success : theme.colors.main};
   align-items: center;
   justify-content: center;
