@@ -4,6 +4,7 @@ import { CarDTO } from '../dtos/CarDTO'
 import { RentalPeriod } from '../screens/Scheduling';
 
 export type RootStackParamList = {
+  Splash: undefined,
   Home: undefined,
   CarDetails: {
     car: CarDTO;

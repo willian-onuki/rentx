@@ -17,6 +17,7 @@ import AppLoading from 'expo-app-loading';
 import { Routes } from './src/routes';
 import theme from './src/styles/theme';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Splash } from './src/screens/Splash';
 
 SplashScreen.preventAutoHideAsync();
 
