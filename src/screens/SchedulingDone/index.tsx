@@ -1,29 +1,16 @@
+import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Alert, StatusBar } from 'react-native';
 import { useTheme } from 'styled-components';
 import { BackButton } from '../../components/BackButton';
 import { Car } from '../../components/Car';
-import { Loading } from '../../components/Loading';
 import { CarDTO } from '../../dtos/CarDTO';
 import { api } from '../../services/api';
-import { AntDesign } from '@expo/vector-icons'
 
+import { AnimatedLoadingCar } from '../../components/AnimatedLoadingCar';
 import {
-  Container,
-  Header,
-  HeaderTitle,
-  HeaderSubTitle,
-  Content,
-  ScheuduleQuantity,
-  Text,
-  Quantity,
-  CarList,
-  Footer,
-  Title,
-  DateScheduled,
-  Start,
-  End
+  CarList, Container, Content, DateScheduled, End, Footer, Header, HeaderSubTitle, HeaderTitle, Quantity, ScheuduleQuantity, Start, Text, Title
 } from './styles';
 
 export interface CarScheduled {
@@ -92,7 +79,7 @@ export function SchedulingDone() {
       <Content>
         {
           loading
-            ? <Loading />
+            ? <AnimatedLoadingCar />
             : <>
               <ScheuduleQuantity>
                 <Text>

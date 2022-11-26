@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar, StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet, BackHandler } from 'react-native';
 import LogoSvg from '../../assets/logo.svg';
 import { RFValue } from 'react-native-responsive-fontsize'
 
@@ -16,7 +16,7 @@ import { Car } from '../../components/Car';
 import { useNavigation } from '@react-navigation/native';
 import { api } from '../../services/api';
 import { CarDTO } from '../../dtos/CarDTO';
-import { Loading } from '../../components/Loading';
+import { AnimatedLoadingCar } from '../../components/AnimatedLoadingCar';
 import { Ionicons } from '@expo/vector-icons'
 import { useTheme } from 'styled-components';
 
@@ -80,6 +80,12 @@ export function Home() {
     init();
   }, [])
 
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      return true;
+    });
+  }, []);
+
   return (
     <Container>
       <StatusBar
@@ -94,9 +100,11 @@ export function Home() {
               width={RFValue(108)}
               height={RFValue(12)} />
           </Logo>
-          <CarTotal>
-            Total de {cars ? cars.length : '0'}
-          </CarTotal>
+          {
+            !loading && <CarTotal>
+              Total de {cars ? cars.length : '0'}
+            </CarTotal>
+          }
         </HeaderContent>
       </Header>
       {!loading
@@ -110,7 +118,7 @@ export function Home() {
             />
           }
         />
-        : <Loading />
+        : <AnimatedLoadingCar />
       }
       <PanGestureHandler onGestureEvent={onGestureEvent}>
         <Animated.View

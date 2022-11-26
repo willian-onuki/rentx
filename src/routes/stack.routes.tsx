@@ -20,13 +20,38 @@ export function StackRoutes() {
       }}
       initialRouteName='Splash'
     >
-      <Screen name='Splash' component={Splash} />
-      <Screen name='Home' component={Home} />
-      <Screen name='CarDetails' component={CarDetails} />
-      <Screen name='Scheduling' component={Scheduling} />
-      <Screen name='SchedulingDetails' component={SchedulingDetails} />
-      <Screen name='SchedulingComplete' component={SchedulingComplete} />
-      <Screen name='SchedulingDone' component={SchedulingDone} />
+      <Screen
+        name='Splash'
+        component={Splash}
+      />
+      <Screen
+        name='Home'
+        component={Home}
+        // This options prevents the user iphone to swipe back
+        options={{
+          gestureEnabled: false,
+        }}
+      />
+      <Screen
+        name='CarDetails'
+        component={CarDetails}
+      />
+      <Screen
+        name='Scheduling'
+        component={Scheduling}
+      />
+      <Screen
+        name='SchedulingDetails'
+        component={SchedulingDetails}
+      />
+      <Screen
+        name='SchedulingComplete'
+        component={SchedulingComplete}
+      />
+      <Screen
+        name='SchedulingDone'
+        component={SchedulingDone}
+      />
     </Navigator>
   );
 }
