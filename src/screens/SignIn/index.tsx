@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   StatusBar,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-} from "react-native";
-import { useTheme } from "styled-components";
-import { Button } from "../../components/Button";
-import { Input } from "../../components/Input";
-import { InputPassword } from "../../components/InputPassword";
+  Alert,
+} from 'react-native';
+import { useTheme } from 'styled-components';
+import { Button } from '../../components/Button';
+import { Input } from '../../components/Input';
+import { InputPassword } from '../../components/InputPassword';
+import * as Yup from 'yup';
 
 import {
   Container,
@@ -17,50 +19,88 @@ import {
   SubTitle,
   WrapperInput,
   WrapperButtons,
-} from "./styles";
+} from './styles';
+import { useNavigation } from '@react-navigation/native';
+import { api } from '../../services/api';
+import { useAuth } from '../../hooks/auth';
 
 export function SignIn() {
   const theme = useTheme();
+  const navigation = useNavigation();
+  const { signIn } = useAuth();
 
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSignIn = async () => {
+    setLoading(true);
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string().email('Digite um e-mail válido'),
+        password: Yup.string().min(6, 'A senha precisa ter no mínimo 6 letras'),
+      });
+      const credentials = {
+        email,
+        password
+      }
+      await schema.validate(credentials);
+      await signIn(credentials);
+
+      navigation.navigate('Home')
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert('Atenção', error.message);
+      } else {
+        Alert.alert(
+          'Erro na autenticação',
+          'Ocorreu um erro ao fazer login, verifique suas credenciais'
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleNewAccount = () => {
+    navigation.navigate('FirstStep');
+  };
 
   return (
     <KeyboardAvoidingView
-      behavior="position"
+      behavior='position'
       enabled
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container>
           <StatusBar
-            barStyle="dark-content"
+            barStyle='dark-content'
             backgroundColor={theme.colors.background_primary}
             translucent
           />
           <Header>
             <Title>
-              Estamos{"\n"}
+              Estamos{'\n'}
               quase lá.
             </Title>
             <SubTitle>
-              Faça seu login para começar{"\n"}
+              Faça seu login para começar{'\n'}
               uma experiência incrível.
             </SubTitle>
           </Header>
 
           <WrapperInput>
             <Input
-              iconName="mail"
-              placeholder="E-mail"
-              keyboardType="email-address"
+              iconName='mail'
+              placeholder='E-mail'
+              keyboardType='email-address'
               autoCorrect={false}
-              autoCapitalize="none"
+              autoCapitalize='none'
               onChangeText={setEmail}
               value={email}
             />
             <InputPassword
-              iconName="lock"
-              placeholder="Senha"
+              placeholder='Senha'
               onChangeText={setPassword}
               value={password}
             />
@@ -68,16 +108,16 @@ export function SignIn() {
 
           <WrapperButtons>
             <Button
-              title="Login"
-              onPress={() => {}}
-              enabled={false}
-              loading={false}
+              title='Login'
+              onPress={handleSignIn}
+              enabled={!!email && !!password}
+              loading={loading}
             />
             <Button
-              title="Criar conta gratuita"
-              onPress={() => {}}
-              enabled={false}
-              loading={false}
+              title='Criar conta gratuita'
+              onPress={handleNewAccount}
+              enabled={!loading}
+              loading={loading}
               color={theme.colors.background_secondary}
               light
             />

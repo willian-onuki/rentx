@@ -14,16 +14,24 @@ import {
 import UnionSvg from '../../assets/logo_background_gray.svg';
 import DoneSvg from '../../assets/done.svg';
 import { StatusBar, useWindowDimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { SuccessProps } from '../../global/routes';
 
-export function SchedulingComplete() {
-  const navigation = useNavigation();
+interface Navigation {
+  navigate: (route: string) => void;
+}
+
+export function Success() {
+  const navigation = useNavigation<Navigation>();
+  const route = useRoute<SuccessProps>();
+
+  const { title, message, nextRoute } = route.params;
 
   const { width } = useWindowDimensions();
 
   const handleSchedulingCompleted = () => {
-    navigation.navigate('Home');
-  }
+    navigation.navigate(nextRoute);
+  };
 
   return (
     <Container>
@@ -33,31 +41,21 @@ export function SchedulingComplete() {
         translucent
       />
       <Header>
-        <UnionSvg
-          width={width}
-        />
+        <UnionSvg width={width} />
       </Header>
       <Content>
         <DoneSvg
           width={80}
           height={80}
         />
-        <Title>
-          Carro alugado!
-        </Title>
-        <Text>
-          Agora você só precisa ir {'\n'}
-          até a concessionária da RENTX {'\n'}
-          pegar o seu automóvel.
-        </Text>
+        <Title>{title}</Title>
+        {message && <Text>{message}</Text>}
       </Content>
       <Footer>
         <Button onPress={handleSchedulingCompleted}>
-          <ButtonTitle>
-            Ok
-          </ButtonTitle>
+          <ButtonTitle>Ok</ButtonTitle>
         </Button>
       </Footer>
     </Container>
-  )
+  );
 }

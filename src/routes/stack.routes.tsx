@@ -5,10 +5,13 @@ import { Home } from '../screens/Home';
 import { CarDetails } from '../screens/CarDetails';
 import { Scheduling } from '../screens/Scheduling';
 import { SchedulingDetails } from '../screens/SchedulingDetails';
-import { SchedulingComplete } from '../screens/SchedulingComplete';
+import { Success } from '../screens/Success';
 import { RootStackParamList } from '../global/routes.d';
 import { SchedulingDone } from '../screens/SchedulingDone';
 import { Splash } from '../screens/Splash';
+import { SignIn } from '../screens/SignIn';
+import { FirstStep } from '../screens/SignUp/FirstStep';
+import { SecondStep } from '../screens/SignUp/SecondStep';
 
 const { Screen, Navigator } = createNativeStackNavigator<RootStackParamList>();
 
@@ -16,13 +19,25 @@ export function StackRoutes() {
   return (
     <Navigator
       screenOptions={{
-        headerShown: false
+        headerShown: false,
       }}
-      initialRouteName='Splash'
+      initialRouteName='SignIn'
     >
       <Screen
         name='Splash'
         component={Splash}
+      />
+      <Screen
+        name='SignIn'
+        component={SignIn}
+      />
+      <Screen
+        name='FirstStep'
+        component={FirstStep}
+      />
+      <Screen
+        name='SecondStep'
+        component={SecondStep}
       />
       <Screen
         name='Home'
@@ -45,8 +60,8 @@ export function StackRoutes() {
         component={SchedulingDetails}
       />
       <Screen
-        name='SchedulingComplete'
-        component={SchedulingComplete}
+        name='Success'
+        component={Success}
       />
       <Screen
         name='SchedulingDone'

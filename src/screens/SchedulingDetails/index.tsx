@@ -71,7 +71,14 @@ export function SchedulingDetails() {
       })
 
       navigation.dispatch(StackActions.popToTop());
-      navigation.navigate('SchedulingComplete');
+      navigation.navigate('Success', {
+        title: 'Carro alugado!',
+        message: `
+          Agora você só precisa ir \n
+          até a concessionária da RENTX.
+        `,
+        nextRoute: 'Home',
+      });
     } catch (error) {
       Alert.alert(
         'Erro',
