@@ -6,6 +6,7 @@ import LogoSvg from '../../assets/logo.svg';
 
 import { Container } from './styles';
 import { useNavigation } from '@react-navigation/native';
+import { AppStackParamList, AppStackScreenProps } from '../../global/routes';
 
 export function Splash() {
   const navigation = useNavigation();
@@ -48,7 +49,7 @@ export function Splash() {
   });
 
   const startApp = () => {
-    navigation.navigate('Home');
+    navigation.navigate('SignIn');
   }
 
   useEffect(() => {

@@ -23,7 +23,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { DateData } from 'react-native-calendars';
 import { generateInterval } from '../../components/Calendar/generateInterval';
 import { addDays, format } from 'date-fns';
-import { SchedulingProps } from '../../global/routes';
+import { RouteProps } from '../../global/routes';
 import { api } from '../../services/api';
 
 export interface RentalPeriod {
@@ -42,7 +42,7 @@ export function Scheduling() {
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod)
   const theme = useTheme();
   const navigation = useNavigation();
-  const route = useRoute<SchedulingProps>();
+  const route = useRoute<RouteProps<'Scheduling'>>();
 
   const { car } = route.params
 

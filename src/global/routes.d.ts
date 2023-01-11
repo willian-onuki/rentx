@@ -1,8 +1,14 @@
-import { RouteProp } from '@react-navigation/native';
+import { NavigatorScreenParams, RouteProp } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { CarDTO } from '../dtos/CarDTO'
 import { RentalPeriod } from '../screens/Scheduling';
 import { User } from '../screens/SignUp/SecondStep';
+
+export type HomeTabParamList = {
+  Home: undefined;
+  SchedulingDone: undefined;
+  Profile: undefined;
+};
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -15,7 +21,7 @@ export type RootStackParamList = {
       driverLicense: string;
     };
   };
-  Home: undefined;
+  Home: NavigatorScreenParams<HomeTabParamList>;
   CarDetails: {
     car: CarDTO;
   };
@@ -31,19 +37,12 @@ export type RootStackParamList = {
     message?: string;
     nextRoute: string;
   };
-  SchedulingDone: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
   StackScreenProps<RootStackParamList, T>;
 
-export type CarDetailsProps = RouteProp<RootStackParamList, 'CarDetails'>
-export type SchedulingProps = RouteProp<RootStackParamList, 'Scheduling'>
-export type SchedulingDetailsProps = RouteProp<RootStackParamList, 'SchedulingDetails'>
-
-export type SuccessProps = RouteProp<RootStackParamList, 'Success'>;
-
-export type SignUpSecondStepProps = RouteProp<RootStackParamList, 'SecondStep'>
+export type RouteProps<T extends keyof RootStackParamList> = RouteProp<RootStackParamList, T>
 
 declare global {
   namespace ReactNavigation {

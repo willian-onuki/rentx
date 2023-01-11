@@ -47,6 +47,7 @@ export function Home() {
 
   const handleCarDetails = (car: CarDTO) => {
     navigation.navigate('CarDetails', { car });
+    // navigation.navigate('Success');
   }
 
   const onGestureEvent = useAnimatedGestureHandler({
@@ -120,34 +121,6 @@ export function Home() {
         />
         : <AnimatedLoadingCar />
       }
-      <PanGestureHandler onGestureEvent={onGestureEvent}>
-        <Animated.View
-          style={[myCarsButtonAnimated,
-            {
-              position: 'absolute',
-              bottom: 13,
-              right: 22,
-            }
-          ]}
-        >
-          <AnimatedButton
-            onPress={() => navigation.navigate('SchedulingDone')}
-            style={[styled.button, { backgroundColor: theme.colors.main }]}
-          >
-            <Ionicons name='ios-car-sport' color={theme.colors.background_primary} size={32} />
-          </AnimatedButton>
-        </Animated.View>
-      </PanGestureHandler>
     </Container>
   )
 }
-
-const styled = StyleSheet.create({
-  button: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-})

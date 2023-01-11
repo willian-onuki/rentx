@@ -15,7 +15,7 @@ import UnionSvg from '../../assets/logo_background_gray.svg';
 import DoneSvg from '../../assets/done.svg';
 import { StatusBar, useWindowDimensions } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { SuccessProps } from '../../global/routes';
+import { RouteProps } from '../../global/routes';
 
 interface Navigation {
   navigate: (route: string) => void;
@@ -23,7 +23,7 @@ interface Navigation {
 
 export function Success() {
   const navigation = useNavigation<Navigation>();
-  const route = useRoute<SuccessProps>();
+  const route = useRoute<RouteProps<'Success'>>();
 
   const { title, message, nextRoute } = route.params;
 

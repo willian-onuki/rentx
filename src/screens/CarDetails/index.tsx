@@ -10,7 +10,7 @@ import { Button } from '../../components/Button';
 import { DataSheet } from '../../components/DataSheet';
 import { ImageSlider } from '../../components/ImageSlider';
 import { CarDTO } from '../../dtos/CarDTO';
-import { CarDetailsProps } from '../../global/routes';
+import { RouteProps } from '../../global/routes';
 import { getAccessories } from '../../utils/getAccessories';
 import {
   About, Brand, Car, CarImage, Container, DataSheetGrid,
@@ -24,7 +24,7 @@ interface RouteParam {
 
 export function CarDetails() {
   const navigation = useNavigation();
-  const route = useRoute<CarDetailsProps>();
+  const route = useRoute<RouteProps<'CarDetails'>>();
   const theme = useTheme();
   const { car } = route.params as RouteParam;
 
@@ -97,10 +97,10 @@ export function CarDetails() {
           </Car>
           <Rent>
             <Period>
-              {car.rent.period}
+              {car.period}
             </Period>
             <Price>
-              R$ {car.rent.price}
+              R$ {car.price}
             </Price>
           </Rent>
         </Details>

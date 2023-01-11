@@ -1,6 +1,8 @@
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import { Feather } from '@expo/vector-icons';
+
 export const Container = styled.View`
   padding: 0 24px;
   background: ${({ theme }) => theme.colors.background_primary};

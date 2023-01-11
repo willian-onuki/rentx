@@ -46,8 +46,6 @@ export function SignIn() {
       }
       await schema.validate(credentials);
       await signIn(credentials);
-
-      navigation.navigate('Home')
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert('Atenção', error.message);

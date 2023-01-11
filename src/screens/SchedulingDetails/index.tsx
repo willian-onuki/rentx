@@ -22,7 +22,7 @@ import {
   RentalPriceTotal
 } from './styles';
 import { StackActions, useNavigation, useRoute } from '@react-navigation/native';
-import { SchedulingDetailsProps } from '../../global/routes';
+import { RouteProps } from '../../global/routes';
 import { getAccessories } from '../../utils/getAccessories';
 import { addDays, format } from 'date-fns';
 import { api } from '../../services/api';
@@ -42,7 +42,7 @@ interface Response {
 
 export function SchedulingDetails() {
   const navigation = useNavigation();
-  const route = useRoute<SchedulingDetailsProps>();
+  const route = useRoute<RouteProps<'SchedulingDetails'>>();
   const { car, dates } = route.params;
 
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
@@ -97,7 +97,7 @@ export function SchedulingDetails() {
 
   useEffect(() => {
     const totalDays = dates.length - 1;
-    const totalRent = totalDays * car.rent.price;
+    const totalRent = totalDays * car.price;
 
     const start = format(addDays(new Date(dates[0]), 1), 'dd/MM/yyyy')
     const end = format(addDays(new Date(dates[totalDays]), 1), 'dd/MM/yyyy')
@@ -130,10 +130,10 @@ export function SchedulingDetails() {
           </Car>
           <Rent>
             <Period>
-              {car.rent.period}
+              {car.period}
             </Period>
             <Price>
-              R$ {car.rent.price}
+              R$ {car.price}
             </Price>
           </Rent>
         </Details>
@@ -179,7 +179,7 @@ export function SchedulingDetails() {
             Total
           </RentalPriceLabel>
           <RentalPriceDetail>
-            <RentalPriceQuota>R$ {car.rent.price} x{rentalPeriod.totalDays} diárias</RentalPriceQuota>
+            <RentalPriceQuota>R$ {car.price} x{rentalPeriod.totalDays} diárias</RentalPriceQuota>
             <RentalPriceTotal>R$ {rentalPeriod.totalRent}</RentalPriceTotal>
           </RentalPriceDetail>
         </RentalPrice>

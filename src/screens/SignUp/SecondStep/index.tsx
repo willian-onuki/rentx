@@ -25,7 +25,7 @@ import {
   HeaderContent,
 } from './styles';
 import * as Yup from 'yup';
-import { SignUpSecondStepProps } from '../../../global/routes';
+import { RouteProps } from '../../../global/routes';
 import { api } from '../../../services/api';
 
 export interface User {
@@ -37,7 +37,7 @@ export interface User {
 
 export function SecondStep() {
   const navigation = useNavigation();
-  const route = useRoute<SignUpSecondStepProps>();
+  const route = useRoute<RouteProps<'SecondStep'>>();
   const theme = useTheme();
 
   const { user } = route.params;
