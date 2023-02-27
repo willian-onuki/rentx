@@ -21,7 +21,7 @@ export type RootStackParamList = {
       driverLicense: string;
     };
   };
-  Home: NavigatorScreenParams<HomeTabParamList>;
+  AppTabRoutes: NavigatorScreenParams<HomeTabParamList>;
   CarDetails: {
     car: CarDTO;
   };

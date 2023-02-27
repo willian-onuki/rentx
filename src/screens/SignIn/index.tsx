@@ -1,36 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  StatusBar,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
   Alert,
+  Keyboard,
+  KeyboardAvoidingView,
+  StatusBar,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import { useTheme } from 'styled-components';
+import * as Yup from 'yup';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { InputPassword } from '../../components/InputPassword';
-import * as Yup from 'yup';
 
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../hooks/auth';
 import {
   Container,
   Header,
-  Title,
   SubTitle,
-  WrapperInput,
+  Title,
   WrapperButtons,
+  WrapperInput,
 } from './styles';
-import { useNavigation } from '@react-navigation/native';
-import { api } from '../../services/api';
-import { useAuth } from '../../hooks/auth';
+
+import { database } from '../../database'
 
 export function SignIn() {
   const theme = useTheme();
   const navigation = useNavigation();
   const { signIn } = useAuth();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('teste@teste.com');
+  const [password, setPassword] = useState('123123');
   const [loading, setLoading] = useState(false);
 
   const handleSignIn = async () => {
@@ -42,8 +43,8 @@ export function SignIn() {
       });
       const credentials = {
         email,
-        password
-      }
+        password,
+      };
       await schema.validate(credentials);
       await signIn(credentials);
     } catch (error) {
@@ -63,6 +64,14 @@ export function SignIn() {
   const handleNewAccount = () => {
     navigation.navigate('FirstStep');
   };
+
+  useEffect(() => {
+    async function loadData() {
+      const usersCollections = database.get('users');
+      await usersCollections.query().fetch();
+    }
+    loadData();
+  }, [])
 
   return (
     <KeyboardAvoidingView

@@ -29,6 +29,7 @@ export function AppTabRoutes() {
           height: 78,
         },
       }}
+      initialRouteName='Home'
     >
       <Screen
         name='Home'

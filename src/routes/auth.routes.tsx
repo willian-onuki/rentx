@@ -6,8 +6,6 @@ import { SignIn } from '../screens/SignIn';
 import { FirstStep } from '../screens/SignUp/FirstStep';
 import { SecondStep } from '../screens/SignUp/SecondStep';
 import { Splash } from '../screens/Splash';
-import { Success } from '../screens/Success';
-import { AppTabRoutes } from './app.tab.routes';
 
 const { Screen, Navigator } = createNativeStackNavigator<RootStackParamList>();
 
@@ -35,14 +33,6 @@ export function AuthRoutes() {
         name='SecondStep'
         component={SecondStep}
       />
-      {/* <Screen
-        name='Home'
-        component={AppTabRoutes}
-      /> */}
-      {/* <Screen
-        name='Success'
-        component={Success}
-      /> */}
     </Navigator>
   );
 }

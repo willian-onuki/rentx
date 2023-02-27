@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
-import { useTheme } from 'styled-components';
 import Animated, { Extrapolate, interpolate, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import BrandSvg from '../../assets/brand.svg';
 import LogoSvg from '../../assets/logo.svg';
 
-import { Container } from './styles';
 import { useNavigation } from '@react-navigation/native';
-import { AppStackParamList, AppStackScreenProps } from '../../global/routes';
+import { Container } from './styles';
 
 export function Splash() {
   const navigation = useNavigation();

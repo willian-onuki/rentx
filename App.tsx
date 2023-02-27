@@ -15,6 +15,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AppProvider } from './src/hooks';
 import { Routes } from './src/routes';
 import theme from './src/styles/theme';
+import { Profile } from './src/screens/Profile';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,6 +41,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <AppProvider>
           <Routes />
+          {/* <Profile/> */}
         </AppProvider>
       </ThemeProvider>
     </GestureHandlerRootView>

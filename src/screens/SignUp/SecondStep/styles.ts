@@ -9,7 +9,6 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   margin-top: ${getStatusBarHeight() + 31}px;
-  border: 1px red solid;
   width: 100%;
 `;
 
