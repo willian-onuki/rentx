@@ -53,13 +53,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       const usersCollections = database.get<ModelUser>('users');
       await database.write(async () => {
-        const newUser = await usersCollections.create((user) => {
-          user.id = user.id;
-          user.name = user.name;
-          user.email = user.email;
-          user.driver_license = user.driver_license;
-          user.avatar = user.avatar;
-          user.token = token;
+        await usersCollections.create((newUser) => {
+          newUser.user_id = user.id;
+          newUser.name = user.name;
+          newUser.email = user.email;
+          newUser.driver_license = user.driver_license;
+          newUser.avatar = user.avatar;
+          newUser.token = token;
         });
       });
 
@@ -87,8 +87,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const updateUser = async (user: User) => {
     try {
       await database.write(async () => {
-        const findedUser = await database.get<ModelUser>('users').find(data.id);
-        await findedUser.update((userData) => {
+        const findedUser = await database.get<ModelUser>('users').find(user.id);
+         await findedUser.update((userData) => {
           userData.name = user.name;
           userData.driver_license = user.driver_license;
           userData.avatar = user.avatar;
@@ -97,7 +97,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       setData(user);
     } catch (error) {
-      throw new error(error);
+      throw new Error(error);
     }
   };
 

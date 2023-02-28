@@ -68,7 +68,8 @@ export function SignIn() {
   useEffect(() => {
     async function loadData() {
       const usersCollections = database.get('users');
-      await usersCollections.query().fetch();
+      const user = await usersCollections.query().fetch();
+      console.log(user);
     }
     loadData();
   }, [])

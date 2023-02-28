@@ -27,18 +27,24 @@ export function FormData({
         iconName='user'
         placeholder='Nome'
         defaultValue={name}
+        onChangeText={setName}
+        value={name}
       />
       <Input
         iconName='mail'
         placeholder='E-mail'
         keyboardType='email-address'
         defaultValue={email}
+        onChangeText={setEmail}
+        value={email}
       />
       <Input
         iconName='credit-card'
         placeholder='CNH'
         keyboardType='numeric'
         defaultValue={driverLicense}
+        onChangeText={setDriverLicense}
+        value={driverLicense}
       />
     </Container>
   );

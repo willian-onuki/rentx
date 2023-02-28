@@ -103,8 +103,13 @@ export function Profile() {
 
       await schema.validate({ name, driverLicense });
 
-      const userChanges = { ...user, avatar, name, driverLicense } as User;
-      await updateUser(userChanges);
+      const userData = {
+        ...user,
+        name,
+        driver_license: driverLicense,
+        avatar,
+      }
+      await updateUser(userData);
 
       Alert.alert('Perfil atualizado!');
     } catch (error) {
@@ -123,7 +128,7 @@ export function Profile() {
       [
         {
           text: 'Não',
-          onPress: () => { },
+          onPress: () => {},
         },
         {
           text: 'Sair',
